@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="data.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="center" id="all">
+            <div class="content-wrapper" id="01">
+                <img class="sova" src="sova.png" alt="">
+
+                <div class="zagolovok">Правила русского языка</div>
+
+                <div class="description">Здесь вы можете узнать теорию по основным правилам русского языка и пройти
+                    тесты
+                    по ним
+                </div>
+
+                <div class="action-button" style="margin-top: 30px;">
+                    <a href="#" class="blue" onclick="go_to('02')"><span>Правила</span></a>
+                </div>
+
+                <div class="action-button">
+                    <a href="#" class="red"><span>Контрольные тесты</span></a>
+                </div>
+            </div>
+
+            <div class="content-wrapper" id="02" style="display:none;">
+                <img class="sova" src="sova.png" alt="">
+                <div class="zagolovok">Разделы</div>
+                <div class="action-button">
+                    <a href="#" onclick="send_listofrules('❇️Орфография')" class="green"><span>Орфография</span></a>
+                </div>
+                <div class="action-button">
+                    <a href="#" class="red" onclick="send_listofrules('Пунктуация❇️')"><span>Пунктуация</span></a>
+                </div>
+                <div class="action-button">
+                    <a href="#" class="blue" onclick="send_listofrules('✳️Прочее✳️')"><span>Прочее</span></a>
+                </div>
+                <div class="action-button">
+                    <a href="#" class="purple" onclick="go_to('01')"><span><--Главное меню</span></a>
+                </div>
+            </div>
+
+            <div class="content-wrapper" id="03" style="display:none;">
+                <div id="place-for-rules">
+
+                </div>
+                <div class="low-menu">
+                    <div class="action-button">
+                        <a href="#" class="purple" onclick="go_to('02')"><span><-- Разделы</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-wrapper" id="04" style="display:none;">
+                <div id="place-for-images">
+
+                </div>
+        
+                <div class="low-menu" id = "low-menu">
+
+                    <div class="action-button">
+                        <a href="#" class="red to-test">
+                            <span>Пройти тест</span>
+                        </a>
+                    </div>
+                    <div class="action-button">
+                        <a href="#" class="purple" onclick="go_to('03')">
+                            <span><-- Правила</span>
+                        </a>
+                    </div>            
+                </div>
+
+            </div>
+
+            <div class="content-wrapper" id="05" style="display:none;">
+                <div id="place-for-test">
+                </div>
+                <div class="low-menu" id="stop-test">
+                    <div class="action-button">
+                        <a href="#" class="red" onclick="go_to('01')"><span>Завершить тест</span></a>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+    <script>
+
+        function go_to(id) {
+            let ids = ['01', '02', '03', '04', '05'];
+            ids.forEach(i => {
+                document.getElementById(i).style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function send_listofrules(section) {
+            go_to('03');
+            let pravila = document.getElementById("place-for-rules");
+            pravila.innerHTML = '';
+            rules = Object.keys(data[section]);
+            rules.forEach(rule => {
+                let span = document.createElement('span');
+                span.append(rule);
+                let a = document.createElement('a');
+                a.setAttribute("class", "light-blue");
+                a.append(span);
+                a.addEventListener('click', function () { send_images(event); });
+                div = document.createElement('div');
+                div.setAttribute("class", "action-button");
+                div.append(a);
+                pravila.append(div);
+            });
+            low_menu = document.getElementsByClassName("low-menu");
+            $("#place-for-rules").height($(window).height() - low_menu[0].offsetHeight - 25 +'px');
+        }
+
+        window.addEventListener("resize", (event) => {
+            low_menu = document.getElementsByClassName("low-menu");
+            $("#place-for-rules").height($(window).height() - low_menu[0].offsetHeight - 25 +'px');
+            $("#place-for-images").height($(window).height() - low_menu[1].offsetHeight - 25 +'px');
+            $("#place-for-test").height($(window).height() - low_menu[2].offsetHeight - 30 +'px');
+        })
+
+        
+        function send_images(event) {
+            
+            go_to('04');
+            let imagesout = document.getElementById("place-for-images");
+            imagesout.innerHTML = '';
+
+            rule = event.target.innerText;
+            images = [];
+            let section = "";
+            if (!(rule in data["❇️Орфография"])) {
+                if (!(rule in data["Пунктуация❇️"])) {
+                    images = data["✳️Прочее✳️"][rule]["photos"];
+                    section = "✳️Прочее✳️";
+                } else {
+                    images = data["Пунктуация❇️"][rule]["photos"];
+                    section = "Пунктуация❇️";
+                }
+            } else {
+                images = data["❇️Орфография"][rule]["photos"];
+                section = "❇️Орфография";
+            }
+            images.forEach(image => {
+                let a = document.createElement('a');
+                let img = document.createElement('img');
+                a.href = "images/" + image + ".jpg";
+                a.target = "_blank";
+                img.src = "images/" + image + ".jpg";
+                a.append(img);;
+                imagesout.append(a);
+            })
+            low_menu = document.getElementById('low-menu');
+            console.log(low_menu);
+            $(".to-test").off( "click");
+
+            $(".to-test").click(function(){
+                send_test(section,rule);
+            });
+
+            $("#place-for-images").height($(window).height() - low_menu.offsetHeight - 25 +'px');
+
+        }
+        var cntcorrect = 0;
+        function send_test(section, rule) {
+            console.log(section, rule);
+            cntcorrect = 0;
+            go_to('05');
+            let questout = document.getElementById('place-for-test');
+            questout.innerHTML = '';
+            all_questions = data[section][rule]["questions"];
+            let num = 0;
+            all_questions.forEach(question => {
+                let qtext = document.createElement('div');
+                qtext.classList.add('qtext');
+                qtext.innerHTML = question["vopros"];
+                let place_for_question = document.createElement('div');;
+                place_for_question.classList.add('place-for-question');
+                place_for_question.setAttribute("id", num++);
+                place_for_question.append(qtext);
+                question["variants"].forEach(variant => {
+                    let div = document.createElement('div');
+                    div.classList.add('variant');
+                    div.innerHTML = variant;
+                    div.addEventListener('click', function () {
+                        check_answer(section, rule, question, event, all_questions);
+                    })
+
+                    place_for_question.append(div);
+                });
+                place_for_question.style.display = 'none';
+                place_for_question.style.opacity = '0';
+
+                questout.append(place_for_question);
+            });
+            low_menu = document.getElementById("stop-test");
+            $("#place-for-test").height($(window).height() - low_menu.offsetHeight - 30 +'px');
+            show_question(0, all_questions, cntcorrect);
+
+        }
+        function check_answer(section, rule, question, event,all_questions) {
+            event.target.parentNode.style['pointer-events'] = 'none';
+            let answer = event.target.innerHTML;
+            if (answer == question["correct"]) {
+                cntcorrect++;
+                event.target.classList.add("correct");
+            } else {
+                event.target.classList.add("incorrect");
+                let elems = event.target.parentNode;
+                objvariants = Array.prototype.slice.call(event.target.parentNode.childNodes);
+                objvariants.forEach(objvariant => {
+                    if (objvariant.innerText == question["correct"]) {
+                        objvariant.classList.add("correct");
+                    }
+                });
+            }
+            console.log(cntcorrect);
+            show_question(Number(event.target.parentNode.id) + 1, all_questions);
+        }
+        function show_question(num, all_questions) {
+            let question = document.getElementById(num);
+            if(question == null){
+                $('#place-for-test').append($('<div>', {
+                    class: 'result'
+                }).append($('<div>',{
+                    class: 'qtext',
+                    text: `Ваш результат: ${cntcorrect} из ${all_questions.length}`
+                })));
+                $('.result')[0].scrollIntoView({ behavior: "smooth" });
+                    
+            }
+            question.style.display = 'flex';
+            question.style.animation = 'appear 1s ease forwards';
+            question.scrollIntoView({ behavior: "smooth" });
+        }
+
+    </script>
+</body>
+
+</html>

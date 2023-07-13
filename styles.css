@@ -1,0 +1,266 @@
+html,
+body {
+    /* width: 100%; */
+    /* height: 100%; */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* height:100vh; */
+}
+
+html {
+    background-image: url("https://images.wallpaperscraft.ru/image/single/fon_tsvet_razmytie_210279_3840x2400.jpg");
+    background-size: 100vw 100vh;
+}
+
+.wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: auto; */
+}
+
+.center {
+    position: relative;
+    box-shadow: 3px 3px 10px;
+    border: 3px solid black;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 100%;
+    height: 98%;
+    max-width: 800px;
+    max-height: 1200px;
+    background-color: white;
+    user-select: none;
+}
+
+.content-wrapper {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    gap: 10px;
+
+}
+
+
+.sova {
+    box-shadow: 3px 3px 10px;
+    margin-top: 30px;
+    border-radius: 50%;
+    border: 3px solid black;
+    object-fit: cover;
+    max-width: 450px;
+    max-height: 450px; 
+    width: 80%;
+    height: auto;
+}
+
+
+.zagolovok{
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    font-weight: 900;
+    font-size: calc(30px + 1vw);
+}
+
+.description{
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    font-style: italic;
+    font-size:calc(20px + 0.3vw);
+}
+
+.action-button {
+    width: 90%;
+    max-width: 500px;
+    user-select: none;
+}
+
+.action-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px;
+    border-bottom: 3px solid #00000040;
+    border-right: 3px solid #00000040;
+}
+
+.action-button a span {
+    color: #FFF;
+    font-size: calc(30px + 0.5vw);
+}
+
+.action-button a:active {
+    border: none;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+#place-for-rules{
+    margin-top: 5px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+
+#place-for-images{
+    margin-top: 5px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+#place-for-images img{
+    width: 100%;
+}
+
+
+#place-for-test{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 1px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+
+
+.place-for-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.qtext {
+    text-align: center;
+    width: 95%;
+    font-weight: 800;
+    font-size: calc(20px + 0.1vw);
+}
+
+.result {
+    box-shadow: 0px 0px 5px red;
+    min-height: 100px;
+    width: 95%;
+    border: 3px solid red;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+.place-for-question .variant{
+    font-size: calc(20px + 0.1vw);
+    max-width: 400px;
+    display: flex;
+    min-height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.low-menu {
+
+    position:absolute;
+    bottom: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    gap: 10px;
+}
+
+.blue {
+    background-color: #3498DB;
+    text-shadow: 0px -3px #2980B9;
+}
+
+.red {
+    background-color: #E74C3C;
+    text-shadow: 0px -3px #BD3E31;
+}
+
+.green {
+    background-color: #82BF56;
+    text-shadow: 0px -3px #669644;
+}
+
+
+.purple {
+    background-color: #c400a7;
+    text-shadow: 0px -3px #ac0092;
+}
+
+.yellow {
+    background-color: #fcf753;
+    text-shadow: 0px -3px #fcf753;
+}
+
+
+.light-blue{
+    background-color: #34b6ee;
+    text-shadow: 0px -3px #34b6ee;
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+
+.correct {
+    transition-duration: 1s;
+    background-color: #1bff2ea4;
+}
+
+.incorrect {
+    transition-duration: 1s;
+    background-color: #ff3314aa;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
