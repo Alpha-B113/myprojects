@@ -69,7 +69,7 @@ html {
     max-width: 600px;
     width: 95%;
     font-weight: 900;
-    font-size: calc(30px + 1vw);
+    font-size: 7vw
 }
 
 .description{
@@ -77,8 +77,26 @@ html {
     max-width: 600px;
     width: 95%;
     font-style: italic;
-    font-size:calc(15px + 0.5vw);
+    font-size: 4vw
 }
+
+@media screen and (min-width: 600px) {
+    .zagolovok{
+        text-align: center;
+        max-width: 600px;
+        width: 95%;
+        font-weight: 900;
+        font-size: 45px
+    }
+    .description{
+        text-align: center;
+        max-width: 600px;
+        width: 95%;
+        font-style: italic;
+        font-size: 25px;
+    }
+}
+
 
 .action-button {
     width: 90%;
@@ -194,8 +212,8 @@ html {
 
     position:absolute;
     bottom: 0;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     flex-direction: column;
     display: flex;
     align-items: center;
