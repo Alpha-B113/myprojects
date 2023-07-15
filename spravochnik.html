@@ -23,10 +23,23 @@
                     по ним
                 </div>
 
-                <div class="action-button" style="margin-top: 30px;">
+                <div class="container">
+                    <img src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png" alt="search icon" class="icon">
+                    
+
+                    <div class="stop-search purple" onclick=stop_search() style="display:none"><--</div>
+                    <input type="text" placeholder="Поиск..." class="searchbar" onclick = start_search()>
+                </div>
+
+                <div class="action-button">
                     <a href="#" class="blue" onclick="go_to('02')"><span>Правила</span></a>
                 </div>
-                
+
+                <div class="place-for-search" style="display: none">
+
+                    
+                </div>
+
             </div>
 
             <div class="content-wrapper" id="02" style="display:none;">
@@ -71,7 +84,7 @@
                     </div>
                     <div class="action-button">
                         <a href="#" class="purple" onclick="go_to('03')">
-                            <span><-- Правила</span>
+                            <span><-- Назад</span>
                         </a>
                     </div>            
                 </div>
@@ -83,7 +96,7 @@
                 </div>
                 <div class="low-menu" id="stop-test">
                     <div class="action-button">
-                        <a href="#" class="red" onclick="go_to('01')"><span>Завершить тест</span></a>
+                        <a href="#" class="red" onclick="stop_search()"><span>Завершить тест</span></a>
                     </div>
                 </div>
             </div>
@@ -94,7 +107,91 @@
     </div>
     <script>
 
+        var search_started = false;
+        function start_search() {
+            if(search_started) return;
+            clear_all_rules();
+            search_started = true;
+            $('.stop-search').css("display", "flex");
+            $('.icon').css("display", "none");
+
+            let all = document.getElementById('01').childNodes;
+            for(let i = 0; i < all.length; i++){
+                if(all[i].className != "container" && all[i].className != undefined){
+                    all[i].style.display = "none";
+                }
+            }
+            $(".place-for-search").css("display", "flex");
+        }
+
+
+        document.addEventListener('keyup', search);
+
+
+        function search(){
+            let input = document.getElementsByClassName('searchbar');
+            let filter = input[0].value.toLowerCase();
+            let all = document.getElementsByClassName('place-for-search')[0].getElementsByClassName('action-button');
+            for (let i = 0; i < all.length; i++) {
+                 if (all[i].innerText.toLowerCase().indexOf(filter) > -1 && filter != "") {
+                     all[i].style.display = "";
+                 } else {
+                     all[i].style.display = "none";
+                 }
+            }
+        }
+        function stop_search(){
+            go_to('01');
+            search_started = false;
+            let all = document.getElementById('01').childNodes;
+            for(let i = 0; i < all.length; i++){
+                if(all[i].className != "container" && all[i].className != undefined){
+                    all[i].style.display = "block";
+                }
+            }
+
+            document.getElementsByClassName('searchbar')[0].value = '';
+            $(".place-for-search").css("display", "none");
+            $('.stop-search').css("display", "none");
+            $('.icon').css("display", "");
+
+        }
+
+
+        function clear_all_rules(){
+            let all = document.getElementsByClassName('place-for-search')[0].getElementsByClassName('action-button');
+            
+            for(let i = 0; i < all.length; i++){
+                all[i].style.display = "none";
+            }
+        }
+
+
+        window.addEventListener('load', () => {
+            ["❇️Орфография", "Пунктуация❇️", "✳️Прочее✳️"].forEach(section =>{
+                rules = Object.keys(data[section]);
+                rules.forEach(rule => {
+                    let span = document.createElement('span');
+                    span.append(rule);
+                    let a = document.createElement('a');
+                    a.setAttribute("class", "light-blue");
+                    a.append(span);
+                    a.addEventListener('click', function () { send_images(event); });
+                    div = document.createElement('div');
+                    div.setAttribute("class", "action-button");
+                    div.append(a);
+                    div.style.display = 'none';
+                    $('.place-for-search').append(div);
+                });
+            });
+        });
+
+
         function go_to(id) {
+            if(id == '03' && search_started){
+                go_to('01');
+                return;
+            }
             let ids = ['01', '02', '03', '04', '05'];
             ids.forEach(i => {
                 document.getElementById(i).style.display = 'none';
@@ -174,7 +271,7 @@
         }
         var cntcorrect = 0;
         function send_test(section, rule) {
-            console.log(section, rule);
+            search_started = false;
             cntcorrect = 0;
             go_to('05');
             let questout = document.getElementById('place-for-test');

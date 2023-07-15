@@ -13,6 +13,66 @@ html {
     background-size: 100vw 100vh;
 }
 
+
+
+
+
+
+.container {
+    margin-top: 30px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    max-width: 400px;
+    width:80%;
+    height: 50px;
+}
+
+.searchbar {
+    font-size: 20px;
+    width: 100%;
+    /* border: 1px solid black; */
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+.icon {
+    height: 80%;
+}
+
+.stop-search{
+    display: flex;
+    font-size: 40px;
+    font-weight:500;
+    color: white;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 50px;
+    height: 50%;
+    
+    border-radius: 10px;
+    padding: 3px;
+    border-bottom: 3px solid #00000040;
+    border-right: 3px solid #00000040;
+    /* background-color: #c400a7;
+    text-shadow: 0px -3px #ac0092; */
+
+}
+
+
+.place-for-search{
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto; 
+    gap: 5px;
+}
+
+
 .wrapper {
     position: fixed;
     left: 0;
@@ -113,12 +173,22 @@ html {
     padding: 10px;
     border-bottom: 3px solid #00000040;
     border-right: 3px solid #00000040;
+
+    
 }
 
 .action-button a span {
     color: #FFF;
     font-size: calc(30px + 0.5vw);
 }
+
+
+.stop-search:active {
+    border: none;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
 
 .action-button a:active {
     border: none;
