@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+
         <div class="center" id="all">
             <div class="content-wrapper" id="01">
                 <img class="sova" src="sova.png" alt="">
@@ -104,7 +104,6 @@
             
 
         </div>
-    </div>
     <script>
 
         var search_started = false;
@@ -113,6 +112,7 @@
             $('.body').css({
                             height: max_height - window.pageYOffset
                         });
+
             if(search_started) return;
             clear_all_rules();
             search_started = true;
