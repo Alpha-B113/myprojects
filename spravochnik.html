@@ -171,24 +171,6 @@
         }
 
 
-        window.addEventListener('load', () => {
-            ["❇️Орфография", "Пунктуация❇️", "✳️Прочее✳️"].forEach(section =>{
-                rules = Object.keys(data[section]);
-                rules.forEach(rule => {
-                    let span = document.createElement('span');
-                    span.append(rule);
-                    let a = document.createElement('a');
-                    a.setAttribute("class", "light-blue");
-                    a.append(span);
-                    a.addEventListener('click', function () { send_images(event); });
-                    div = document.createElement('div');
-                    div.setAttribute("class", "action-button");
-                    div.append(a);
-                    div.style.display = 'none';
-                    $('.place-for-search').append(div);
-                });
-            });
-        });
 
 
         function go_to(id) {
@@ -231,13 +213,49 @@
             $("#place-for-test").height($(window).height() - low_menu[2].offsetHeight - 30 +'px');
         })
 
+        window.addEventListener('load', () => {
+            ["❇️Орфография", "Пунктуация❇️", "✳️Прочее✳️"].forEach(section =>{
+                rules = Object.keys(data[section]);
+                rules.forEach(rule => {
+                    let span = document.createElement('span');
+                    span.append(rule);
+                    let a = document.createElement('a');
+                    a.setAttribute("class", "light-blue");
+                    a.append(span);
+                    a.addEventListener('click', function () { send_images(event); });
+                    div = document.createElement('div');
+                    div.setAttribute("class", "action-button");
+                    div.append(a);
+                    div.style.display = 'none';
+                    $('.place-for-search').append(div);
+                    
+                    data[section][rule]["photos"].forEach(image =>{
+
+                        let aa = document.createElement('a');
+                        let img = document.createElement('img');
+                        aa.href = "images/" + image + ".jpg";
+                        aa.target = "_blank";
+                        img.src = "images/" + image + ".jpg";
+                        aa.append(img);
+                        $('#place-for-images').append(aa);
+
+                    });
+
+                });
+            });
+        });
+
         
         function send_images(event) {
             
+            let elems = document.getElementById('place-for-images').getElementsByTagName('a');
+            elems = Array.prototype.slice.call(elems);
+            elems.forEach(photo =>{
+                photo.style.display = 'none';
+            })
+            
             go_to('04');
-            let imagesout = document.getElementById("place-for-images");
-            imagesout.innerHTML = '';
-
+            
             rule = event.target.innerText;
             images = [];
             let section = "";
@@ -254,13 +272,12 @@
                 section = "❇️Орфография";
             }
             images.forEach(image => {
-                let a = document.createElement('a');
-                let img = document.createElement('img');
-                a.href = "images/" + image + ".jpg";
-                a.target = "_blank";
-                img.src = "images/" + image + ".jpg";
-                a.append(img);;
-                imagesout.append(a);
+                link = "images/" + image + ".jpg";
+                link1 = `a[href="${link}"]`;
+                let el = document.querySelector(link1);
+                console.log(el);
+                el.style.display = "";
+
             })
             low_menu = document.getElementById('low-menu');
             console.log(low_menu);
