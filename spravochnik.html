@@ -134,7 +134,7 @@
 
         function search(){
             let input = document.getElementsByClassName('searchbar');
-            let filter = input[0].value.toLowerCase();
+            let filter = input[0].value.toLowerCase().trim();
             let all = document.getElementsByClassName('place-for-search')[0].getElementsByClassName('action-button');
             for (let i = 0; i < all.length; i++) {
                  if (all[i].innerText.toLowerCase().indexOf(filter) > -1 && filter != "") {
