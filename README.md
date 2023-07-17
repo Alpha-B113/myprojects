@@ -1,0 +1,1 @@
+This project is a guide with rules for different rules of the Russian language. It offers 27 rules for spelling and punctuation, for each of which you can read the theory, as well as take a test for self-examination.
