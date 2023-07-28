@@ -43,20 +43,35 @@
             </div>
 
             <div class="content-wrapper" id="02" style="display:none;">
-                <img class="sova" src="sova.png" alt="">
-                <div class="zagolovok">Разделы</div>
-                <div class="action-button">
-                    <a href="#" onclick="send_listofrules('❇️Орфография')" class="green"><span>Орфография</span></a>
+                <div id="place-for-sections">
+
+                    <img class="sova" src="sova.png" alt="">
+                    <div class="zagolovok">Разделы</div>
+                    <div class="action-button">
+                        <a href="#" onclick="send_listofrules('❇️Орфография')" class="green"><span>Орфография</span></a>
+                    </div>
+                    <div class="action-button">
+                        <a href="#" class="red" onclick="send_listofrules('Пунктуация❇️')"><span>Пунктуация</span></a>
+                    </div>
+                    <div class="action-button">
+                        <a href="#" class="blue" onclick="send_listofrules('✳️Прочее✳️')"><span>Прочее</span></a>
+                    </div>
+
                 </div>
-                <div class="action-button">
-                    <a href="#" class="red" onclick="send_listofrules('Пунктуация❇️')"><span>Пунктуация</span></a>
+
+                
+                
+
+                <div class="low-menu">
+
+                    <div class="action-button">
+                        <a href="#" class="purple" onclick="go_to('01')"><span><--Главное меню</span></a>
+                    </div>
+                               
                 </div>
-                <div class="action-button">
-                    <a href="#" class="blue" onclick="send_listofrules('✳️Прочее✳️')"><span>Прочее</span></a>
-                </div>
-                <div class="action-button">
-                    <a href="#" class="purple" onclick="go_to('01')"><span><--Главное меню</span></a>
-                </div>
+                
+
+
             </div>
 
             <div class="content-wrapper" id="03" style="display:none;">
@@ -107,6 +122,7 @@
     <script>
 
         var search_started = false;
+        low_menu = document.getElementsByClassName("low-menu");
         function start_search() {
             let max_height = $('html').height();
             $('.body').css({
@@ -171,8 +187,6 @@
         }
 
 
-
-
         function go_to(id) {
             if(id == '03' && search_started){
                 go_to('01');
@@ -183,6 +197,7 @@
                 document.getElementById(i).style.display = 'none';
             });
             document.getElementById(id).style.display = 'flex';
+            correct_low_menu()
         }
 
         function send_listofrules(section) {
@@ -202,16 +217,21 @@
                 div.append(a);
                 pravila.append(div);
             });
-            low_menu = document.getElementsByClassName("low-menu");
-            $("#place-for-rules").height($(window).height() - low_menu[0].offsetHeight - 25 +'px');
+            
         }
 
-        window.addEventListener("resize", (event) => {
-            low_menu = document.getElementsByClassName("low-menu");
-            $("#place-for-rules").height($(window).height() - low_menu[0].offsetHeight - 25 +'px');
-            $("#place-for-images").height($(window).height() - low_menu[1].offsetHeight - 25 +'px');
-            $("#place-for-test").height($(window).height() - low_menu[2].offsetHeight - 30 +'px');
-        })
+        window.addEventListener("resize", correct_low_menu)
+        function correct_low_menu(){
+            
+            $("#place-for-sections").height($(".center").height() - 1 - low_menu[0].offsetHeight +'px');
+       
+            $("#place-for-rules").height($(".center").height() - 1 - low_menu[1].offsetHeight +'px');
+        
+            $("#place-for-images").height($(".center").height() - 1 - low_menu[2].offsetHeight +'px');
+      
+            $("#place-for-test").height($(".center").height() - 1 -  low_menu[3].offsetHeight +'px');
+         
+        }
 
         window.addEventListener('load', () => {
             ["❇️Орфография", "Пунктуация❇️", "✳️Прочее✳️"].forEach(section =>{
@@ -279,16 +299,13 @@
                 el.style.display = "";
 
             })
-            low_menu = document.getElementById('low-menu');
-            console.log(low_menu);
+            
             $(".to-test").off( "click");
 
             $(".to-test").click(function(){
                 send_test(section,rule);
             });
-
-            $("#place-for-images").height($(window).height() - low_menu.offsetHeight - 25 +'px');
-
+         
         }
         var cntcorrect = 0;
         function send_test(section, rule) {
@@ -322,10 +339,8 @@
 
                 questout.append(place_for_question);
             });
-            low_menu = document.getElementById("stop-test");
-            $("#place-for-test").height($(window).height() - low_menu.offsetHeight - 30 +'px');
             show_question(0, all_questions, cntcorrect);
-
+         
         }
         function check_answer(section, rule, question, event,all_questions) {
             event.target.parentNode.style['pointer-events'] = 'none';
