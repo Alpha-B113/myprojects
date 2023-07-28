@@ -308,6 +308,19 @@
          
         }
         var cntcorrect = 0;
+
+
+
+        function shuffle(array){
+            let size = array.length, t, i;
+            while(size){
+                i = Math.floor(Math.random() * size--);
+                t = array[size];
+                array[size] = array[i];
+                array[i] = t;
+            }
+            return array;
+        }
         function send_test(section, rule) {
             search_started = false;
             cntcorrect = 0;
@@ -316,6 +329,7 @@
             questout.innerHTML = '';
             all_questions = data[section][rule]["questions"];
             let num = 0;
+            all_questions = shuffle(all_questions);
             all_questions.forEach(question => {
                 let qtext = document.createElement('div');
                 qtext.classList.add('qtext');
@@ -324,6 +338,7 @@
                 place_for_question.classList.add('place-for-question');
                 place_for_question.setAttribute("id", num++);
                 place_for_question.append(qtext);
+                question["variants"] = shuffle(question["variants"]);
                 question["variants"].forEach(variant => {
                     let div = document.createElement('div');
                     div.classList.add('variant');
