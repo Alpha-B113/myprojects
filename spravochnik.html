@@ -223,13 +223,13 @@
         window.addEventListener("resize", correct_low_menu)
         function correct_low_menu(){
             
-            $("#place-for-sections").height($(".center").height() - 1 - low_menu[0].offsetHeight +'px');
+            $("#place-for-sections").height($(".center").height() - low_menu[0].offsetHeight +'px');
        
-            $("#place-for-rules").height($(".center").height() - 1 - low_menu[1].offsetHeight +'px');
+            $("#place-for-rules").height($(".center").height() - low_menu[1].offsetHeight +'px');
         
-            $("#place-for-images").height($(".center").height() - 1 - low_menu[2].offsetHeight +'px');
+            $("#place-for-images").height($(".center").height() - low_menu[2].offsetHeight +'px');
       
-            $("#place-for-test").height($(".center").height() - 3 -  low_menu[3].offsetHeight +'px');
+            $("#place-for-test").height($(".center").height() -  low_menu[3].offsetHeight +'px');
          
         }
 

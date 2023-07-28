@@ -218,7 +218,7 @@ body {
     align-items: center;
     width: 95%;
     overflow-y: auto;
-    gap: 10px;
+    gap: 5px;
 }
 
 
@@ -230,6 +230,7 @@ body {
     justify-content: center;
     flex-direction: column;
     gap: 10px;
+    margin-bottom:5px;
 }
 
 .qtext {
