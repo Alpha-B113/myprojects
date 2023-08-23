@@ -79,7 +79,7 @@
 
                 </div>
                 <div class="low-menu">
-                    <div class="action-button">
+                    <div class="action-button" style="margin-right:5px ;">
                         <a href="#" class="purple" onclick="go_to('02')"><span><-- Разделы</span></a>
                     </div>
                 </div>
@@ -258,6 +258,7 @@
                         img.src = "images/" + image + ".jpg";
                         aa.append(img);
                         $('#place-for-images').append(aa);
+                        aa.classList.add("image")
 
                     });
 

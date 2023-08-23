@@ -64,13 +64,12 @@ body {
 }
 
 
-
 .center {
     padding-top: 5px;
     position: relative;
     box-shadow: 3px 3px 10px;
-    border: 3px solid black;
-    border-radius: 30px;
+    border: 3px solid black; 
+    border-radius: 10px;
     overflow: hidden;
     width: 100%;
     height: 98.5%;
@@ -138,7 +137,6 @@ body {
     }
 }
 
-
 .action-button {
     width: 90%;
     max-width: 500px;
@@ -197,20 +195,48 @@ body {
     gap: 10px;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(177, 177, 177);
+    border-radius: 5px;
+}
 
 #place-for-images{
     display: flex; 
     flex-direction: column;
     align-items: center;
-    width: 95%;
+    width: 100%;
     overflow-y: auto;
-    gap: 10px;
+    gap: 5px;
 }
+
+a.image {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ccc;
+    background-color: #eee; 
+    box-shadow: 1px 1px 4px #ccc;
+    margin-bottom: 5px;
+}
+
+
 
 #place-for-images img{
-    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 90%;
 }
 
+#place-for-test::-webkit-scrollbar{
+    width: 0px;
+}
 
 #place-for-test{
     display: flex; 
@@ -267,7 +293,6 @@ body {
 }
 
 .low-menu {
-
     position:absolute;
     bottom: 0;
     padding-bottom: 10px;
@@ -316,9 +341,9 @@ body {
 
 
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 0px;
-}
+} */
 
 
 .correct {
